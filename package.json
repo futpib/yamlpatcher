@@ -1,0 +1,47 @@
+{
+  "name": "yamlpatcher",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "license": "yamlpatcher",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "test": "xo && c8 ava",
+    "prepack": "yarn build"
+  },
+  "homepage": "https://github.com/futpib/yamlpatcher",
+  "ava": {
+    "typescript": {
+      "rewritePaths": {
+        "src/": "build/"
+      },
+      "compile": false
+    },
+    "verbose": true
+  },
+  "devDependencies": {
+    "@ava/typescript": "^6.0.0",
+    "@fast-check/ava": "^2.0.2",
+    "@types/invariant": "^2",
+    "@types/lodash.set": "^4",
+    "@types/lodash.topath": "^4",
+    "@types/lodash.unset": "^4",
+    "@types/node": "^24.3.3",
+    "ava": "^6.4.1",
+    "c8": "^10.1.3",
+    "coveralls": "^3.1.1",
+    "typescript": "^5.9.2",
+    "xo": "^1.2.2"
+  },
+  "packageManager": "yarn@4.9.4",
+  "dependencies": {
+    "diff": "^8.0.2",
+    "eslint-config-xo-typescript-overrides": "^2.0.3",
+    "invariant": "^2.2.4",
+    "lodash.set": "^4.3.2",
+    "lodash.topath": "^4.5.2",
+    "lodash.unset": "^4.5.2",
+    "yaml": "^2.8.1"
+  }
+}
