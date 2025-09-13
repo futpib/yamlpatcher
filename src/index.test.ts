@@ -1,9 +1,7 @@
 import test from 'ava';
 import { testProp, fc } from '@fast-check/ava';
-
 import yaml from 'yaml';
-
-import { YamlModification, yamlPatch } from './index.js';
+import { type YamlModification, yamlPatch } from './index.js';
 
 const fcYamlPathSegment = fc.oneof(
 	fc.string({ minLength: 1, maxLength: 10 }),
@@ -58,7 +56,7 @@ function parseModificationsString(modificationsString: string): YamlModification
 
 		if (
 			typeof setLeftString === 'string'
-				&& typeof setRightString === 'string'
+			&& typeof setRightString === 'string'
 		) {
 			const value = eval(`(${setRightString})`);
 
@@ -73,8 +71,8 @@ function parseModificationsString(modificationsString: string): YamlModification
 
 		if (
 			typeof deleteEmptyString === 'string'
-				&& !deleteEmptyString
-				&& typeof deleteString === 'string'
+			&& !deleteEmptyString
+			&& typeof deleteString === 'string'
 		) {
 			modifications.push({
 				type: 'unset',
@@ -96,8 +94,8 @@ const yamlPatchMacro = test.macro({
 		const newYamlString = yamlPatch(originalYamlString, modifications);
 		t.is(newYamlString.trim(), expectedYamlString.trim());
 	},
-	title(providedTitle = '', originalYamlString: string, modificationsString: string, expectedYamlString: string) {
-		return providedTitle || `yamlPatch simple:\n${originalYamlString}\n${modificationsString}\n${expectedYamlString}`;
+	title(providedTitle: string | undefined, originalYamlString: string, modificationsString: string, expectedYamlString: string) {
+		return providedTitle ?? `yamlPatch simple:\n${originalYamlString}\n${modificationsString}\n${expectedYamlString}`;
 	},
 });
 

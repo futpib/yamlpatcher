@@ -1,6 +1,5 @@
 import yaml from 'yaml';
 import * as diff from 'diff';
-
 import set from 'lodash.set';
 import unset from 'lodash.unset';
 import toPath from 'lodash.topath';
@@ -21,9 +20,7 @@ export type YamlModificationUnset = {
 
 export type YamlModification =
 	| YamlModificationSet
-	| YamlModificationUnset
-;
-
+	| YamlModificationUnset;
 function isArrayIndexPathSegment(segment: string): boolean {
 	return /^\d+$/.test(segment);
 }
@@ -72,10 +69,10 @@ export function yamlPatch(
 			return '-' + indentation + modificationPathLastSegment + ':';
 		}
 
-		invariant(false, 'Unknown modification type: ' + (modification as any).type);
+		invariant(false, `Unknown modification type: ${String((modification as any).type)}`);
 	}));
 
-	// console.dir({
+	// Console.dir({
 	// 	modificationSignatures,
 	// }, { depth: null });
 
@@ -86,14 +83,14 @@ export function yamlPatch(
 				.replace(/^([+-]\s*-) .+$/, '$1 ')
 		));
 
-		// console.dir({
+		// Console.dir({
 		// 	hunkSignatures,
 		// }, { depth: null });
 
 		return hunkSignatures.some(hunkSignature => modificationSignatures.has(hunkSignature));
 	});
 
-	// console.dir({
+	// Console.dir({
 	// 	hunks: structuredPatch.hunks,
 	// 	relevantHunks,
 	// }, { depth: null });
