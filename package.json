@@ -4,9 +4,7 @@
   "main": "build/index.js",
   "license": "yamlpatcher",
   "type": "module",
-  "bin": {
-    "yamlpatcher": "./build/cli.js"
-  },
+  "bin": "./build/cli.js",
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
@@ -39,7 +37,7 @@
   },
   "packageManager": "yarn@4.9.4",
   "dependencies": {
-    "cmd-ts": "^0.14.1",
+    "cmd-ts": "0.13.0",
     "diff": "^8.0.2",
     "eslint-config-xo-typescript-overrides": "^2.0.3",
     "invariant": "^2.2.4",

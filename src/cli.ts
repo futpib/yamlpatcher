@@ -10,7 +10,14 @@ import { yamlPatch, type YamlModification } from './index.js';
 
 function parseModification(modificationString: string): YamlModification {
 	const [ setLeftString, setRightString ] = modificationString.split('=').map(s => s.trim());
-	const [ deleteEmptyString, deleteString ] = modificationString.split(/\s+delete\s+/).map(s => s.trim());
+
+	if (modificationString.startsWith('delete ')) {
+		const path = modificationString.slice('delete '.length).trim();
+		return {
+			type: 'unset',
+			path,
+		};
+	}
 
 	if (
 		typeof setLeftString === 'string'
@@ -22,17 +29,6 @@ function parseModification(modificationString: string): YamlModification {
 			type: 'set',
 			path: setLeftString,
 			value,
-		};
-	}
-
-	if (
-		typeof deleteEmptyString === 'string'
-		&& !deleteEmptyString
-		&& typeof deleteString === 'string'
-	) {
-		return {
-			type: 'unset',
-			path: deleteString,
 		};
 	}
 

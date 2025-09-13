@@ -35,7 +35,7 @@ export function yamlPatch(
 		if (modification.type === 'set') {
 			originalObject = set(originalObject, modification.path, modification.value);
 		} else if (modification.type === 'unset') {
-			originalObject = unset(originalObject, modification.path);
+			unset(originalObject, modification.path);
 		}
 	}
 
